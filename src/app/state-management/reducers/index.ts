@@ -6,5 +6,5 @@ import {flightProgramReducer} from "./flight-program-reducer";
 
 
 export const reducers: ActionReducerMap<AirlineState> = {
-  flightPrograms: flightProgramReducer,
+  flightProgramState: flightProgramReducer,
 };

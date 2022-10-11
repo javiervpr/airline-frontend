@@ -8,7 +8,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 export class FlightProgramEffect {
 
 
-  loadMovies$ = createEffect(() => this.actions$.pipe(
+  loadFlightPrograms$ = createEffect(() => this.actions$.pipe(
       ofType(FlightProgramActions.loadFlightPrograms),
       mergeMap(() => this.flightProgramService.getAll()
         .pipe(

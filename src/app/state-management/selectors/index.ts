@@ -1,1 +1,1 @@
-export * from './flight-program.selectors';
+export * from './flight-program.selector';

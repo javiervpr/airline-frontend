@@ -2,7 +2,7 @@ import {FlightProgramState} from "../models";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {flightProgramEntityAdapter} from "../reducers/flight-program-reducer";
 
-export const flightProgramState = createFeatureSelector<FlightProgramState>('flightPrograms');
+export const flightProgramState = createFeatureSelector<FlightProgramState>('flightProgramState');
 
 const {selectAll} = flightProgramEntityAdapter.getSelectors();
 

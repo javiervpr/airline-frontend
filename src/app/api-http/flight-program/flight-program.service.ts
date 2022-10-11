@@ -12,8 +12,6 @@ export class FlightProgramService {
   ) { }
 
   getAll() {
-    console.log('getalllll'
-    );
     return this.http.get<FlightProgram[]>('http://137.184.195.26/api/flight_programs');
   }
 }
