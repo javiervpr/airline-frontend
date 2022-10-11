@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {StoreModule} from "@ngrx/store";
-import {metaReducers, reducers} from "./reducers";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {reducers} from "./reducers";
+import {environment} from "../../environments/environment";
+import {EffectsModule} from "@ngrx/effects";
+import {effects} from "./effects";
 
 
 
@@ -9,9 +13,12 @@ import {metaReducers, reducers} from "./reducers";
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    })
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot(effects)
   ]
 })
 export class StateManagementModule { }

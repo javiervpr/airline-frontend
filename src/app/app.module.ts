@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {StateManagementModule} from "./state-management/state-management.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from "@angular/common/http";
+import { FlightsPageComponent } from './pages/flights-page/flights-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FlightsPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StateManagementModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
