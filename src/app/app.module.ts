@@ -7,11 +7,13 @@ import {StateManagementModule} from "./state-management/state-management.module"
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import { FlightsPageComponent } from './pages/flights-page/flights-page.component';
+import { PassangersPageComponent } from './pages/passangers-page/passangers-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlightsPageComponent
+    FlightsPageComponent,
+    PassangersPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+<h4>Pasajeros</h4>
+<hr>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellido</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let passanger of passangers; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{passanger.name }}
+    </td>
+    <td>
+      {{ passanger.lastName }}
+    </td>
+  </tr>
+  </tbody>
+</table>

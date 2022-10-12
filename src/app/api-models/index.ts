@@ -6,4 +6,5 @@ export * from './worker';
 export * from './aircraft';
 export * from './ticket';
 export * from './avaible-seat';
+export * from './passanger';
 
