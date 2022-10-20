@@ -1,5 +1,7 @@
 import {FlightProgramState} from "./flight-program-state";
+import { PassangerState } from "./passanger-state";
 
 export interface AirlineState {
-  flightProgramState: FlightProgramState
+  flightProgramState: FlightProgramState,
+  passangerState: PassangerState
 }
