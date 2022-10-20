@@ -12,6 +12,10 @@ export const loadPassangersOnSuccess = createAction(
 
 export const addPassanger = createAction(
   '[Passanger] Add',
-  props<Passanger>()
+  props<{newPassanger : Passanger}>()
 )
 
+export const addPassangerSucess = createAction(
+  '[Passanger] App passanger success',
+  props<{ newPassanger: Passanger }>()
+);

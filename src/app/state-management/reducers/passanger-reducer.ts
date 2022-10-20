@@ -19,5 +19,9 @@ export const passangerReducer = createReducer(
   on(PassangerActions.loadPassangersOnSuccess,
     (state: PassangerState, next: { passangers: Passanger[] }) => {
       return passangerEntityAdapter.addMany(next.passangers, state);
-    })
+    }),
+  on(PassangerActions.addPassangerSucess,
+    (state: PassangerState, next: { newPassanger: Passanger }) => {
+      return passangerEntityAdapter.addOne(next.newPassanger, state);
+    }),
 );

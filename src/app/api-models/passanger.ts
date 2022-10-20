@@ -3,5 +3,5 @@ export interface Passanger {
     name: string
     lastName: string
     passport: string
-    needsAssistance: string
+    needsAssistance: boolean
   }
