@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FlightProgram} from "../../api-models";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class FlightProgramService {
   ) { }
 
   getAll() {
-    return this.http.get<FlightProgram[]>('http://137.184.195.26/api/flight_programs');
+    return this.http.get<FlightProgram[]>(`${environment.baseUrl}/api/flight_programs`);
+  }
+
+  get() {
+    return this.http.get<FlightProgram[]>(`${environment.baseUrl}/api/flight`);
   }
 }

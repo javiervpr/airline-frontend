@@ -1,0 +1,19 @@
+{
+  "/gh3kk59dlg.execute-api.us-east-1.amazonaws.com/stage/*": {
+    "target": "https://gh3kk59dlg.execute-api.us-east-1.amazonaws.com/stage/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/gh3kk59dlg.execute-api.us-east-1.amazonaws.com/stage": ""
+    },
+    "logLevel": "debug"
+  },
+
+  "/localhost:8082/*": {
+    "target": "http:/localhost:8082/",
+    "secure": false,
+
+    "logLevel": "debug"
+  }
+}
+
