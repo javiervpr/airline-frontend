@@ -44,11 +44,8 @@ export class FlightDetailComponent implements OnInit, OnDestroy {
 
     for (let indexRow = 1; indexRow <= rows; indexRow++) {
       for (let indexColumn = 1; indexColumn <= columns; indexColumn++) {
-        if (indexRow == 1) {
+        if (indexRow >= 1 && indexRow < 6) {
           seats.push(this.generateAssistanceSeats(`${indexRow}_${indexColumn > 2 ? indexColumn + 2 : indexColumn}`));
-        }
-        if (indexRow > 1 && indexRow < 6) {
-          seats.push(this.generateFirstClassSeats(`${indexRow}_${indexColumn > 2 ? indexColumn + 2 : indexColumn}`));
         }
         if (indexRow >= 6) {
           seats.push(this.generateEconomySeats(`${indexRow}_${indexColumn > 2 ? indexColumn + 2 : indexColumn}`));
@@ -60,10 +57,6 @@ export class FlightDetailComponent implements OnInit, OnDestroy {
 
   generateAssistanceSeats(rowColumn: string): Seat {
     return {code: uuidv4(), type: 'ASSISTANCE', status: 'FREE', rowColumn: rowColumn};
-  }
-
-  generateFirstClassSeats(rowColumn: string): Seat {
-    return {code: uuidv4(), type: 'FIRST_CLASS', status: 'FREE', rowColumn: rowColumn};
   }
 
   generateEconomySeats(rowColumn: string): Seat {
