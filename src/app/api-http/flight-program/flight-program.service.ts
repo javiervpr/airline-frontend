@@ -15,7 +15,7 @@ export class FlightProgramService {
 
   getAll() {
     return this.http.get<FlightProgram[]>(
-      `${environment.baseUrl}/api/flight_programs`
+      `${environment.baseUrl}/api/flight_program`
     );
   }
 

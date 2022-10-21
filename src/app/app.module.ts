@@ -15,6 +15,7 @@ import { CheckInComponent } from './pages/check-in/check-in.component';
 import { FlightDetailComponent } from './pages/flight-detail/flight-detail.component';
 import { LoginComponent } from './pages/login/login.component';
 import {TokenInterceptorService} from "./api-http/auth/token-interceptor.service";
+import { FlightProgramPageComponent } from './pages/flight-program-page/flight-program-page.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {TokenInterceptorService} from "./api-http/auth/token-interceptor.service
     FlightProgramFormComponent,
     CheckInComponent,
     FlightDetailComponent,
-    LoginComponent
+    LoginComponent,
+    FlightProgramPageComponent
   ],
   imports: [
     BrowserModule,

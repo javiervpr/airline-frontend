@@ -8,6 +8,7 @@ import {CheckInComponent} from "./pages/check-in/check-in.component";
 import {FlightDetailComponent} from "./pages/flight-detail/flight-detail.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
+import { FlightProgramPageComponent } from './pages/flight-program-page/flight-program-page.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'flights/:flightId', component: FlightDetailComponent, canActivate: [AuthGuard]},
   {path: 'check-in/:flightId', component: CheckInComponent, canActivate: [AuthGuard]},
   {path: 'flight-programs/new', component: FlightProgramFormComponent},
+  {path: 'flight-programs', component: FlightProgramPageComponent},
 ];
 
 @NgModule({
