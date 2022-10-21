@@ -15,3 +15,7 @@ export const addFlightProgram = createAction(
   props<FlightProgram>()
 )
 
+export const selectFlightProgram = createAction(
+  '[Flight Program] Select pflight program',
+  props<FlightProgram>()
+)

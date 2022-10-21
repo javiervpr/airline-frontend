@@ -1,30 +1,39 @@
-<h4>Flight programs</h4>
-<hr>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Source airport code</th>
-    <th scope="col">Destiny airport code</th>
-    <th scope="col">Start time</th>
-    <th scope="col">End time</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let flightProgram of flightPrograms; index as i">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg'" class="me-2"
-           style="width: 20px" alt="flag image" >
-      {{flightProgram.source_airport_code }}
-    </td>
-    <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg'" class="me-2"
-           style="width: 20px" alt="flag image" >
-      {{ flightProgram.destiny_airport_code }}
-    </td>
-    <td>{{ flightProgram.flight?.startTime  }}</td>
-    <td>{{ flightProgram.flight?.endTime }}</td>
-  </tr>
-  </tbody>
-</table>
+<!--<h4>Flight programs</h4>-->
+<!--<hr>-->
+<!--<table class="table table-striped">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th scope="col">#</th>-->
+<!--    <th scope="col">Source airport code</th>-->
+<!--    <th scope="col">Destiny airport code</th>-->
+<!--    <th scope="col">Start time</th>-->
+<!--    <th scope="col">End time</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let flightProgram of flightPrograms; index as i"  routerLink="flight/{{flightProgram.flight?.uuid}}">-->
+<!--    <th scope="row">{{ i + 1 }}</th>-->
+<!--    <td>-->
+<!--      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg'" class="me-2"-->
+<!--           style="width: 20px" alt="flag image" >-->
+<!--      {{flightProgram.source_airport_code }}-->
+<!--    </td>-->
+<!--    <td>-->
+<!--      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg'" class="me-2"-->
+<!--           style="width: 20px" alt="flag image" >-->
+<!--      {{ flightProgram.destiny_airport_code }}-->
+<!--    </td>-->
+<!--    <td>{{ flightProgram.flight?.startTime  }}</td>-->
+<!--    <td>{{ flightProgram.flight?.endTime }}</td>-->
+<!--    <td>-->
+<!--      <button *ngIf="flightProgram.flight"-->
+<!--        (click)="openDetails(flightProgram)"-->
+<!--        routerLink="check-in/{{flightProgram?.flight?.uuid }}"-->
+<!--        type="button" class="btn btn-link"-->
+<!--        ngbTooltip="See flight info">-->
+<!--        Details-->
+<!--      </button>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->

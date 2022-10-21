@@ -1,10 +1,11 @@
-export * from './crew';
-export * from './flight-program';
-export * from './flight';
-export * from './crew';
-export * from './worker';
-export * from './aircraft';
-export * from './ticket';
-export * from './avaible-seat';
+export * from './flights/crew';
+export * from './flights/flight-program';
+export * as oldFlight from './flights/flight';
+export * from './flights/crew';
+export * from './flights/worker';
+export * from './flights/aircraft';
+export * as oldTicket from './flights/ticket';
+export * as OldSeat from './flights/avaible-seat';
+export * from './check-in/check-in';
+export * from './auth/jwt-response';
 export * from './passanger';
-
