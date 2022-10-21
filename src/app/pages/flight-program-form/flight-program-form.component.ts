@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { FlightProgramService } from 'src/app/api-http/flight-program/flight-program.service';
 import { airportCodes } from 'src/app/utils/airport-codes';
@@ -19,7 +20,8 @@ export class FlightProgramFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private flightProgramsService: FlightProgramService
+    private flightProgramsService: FlightProgramService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -36,6 +38,7 @@ export class FlightProgramFormComponent implements OnInit {
       const respose = await lastValueFrom(
         this.flightProgramsService.create(data)
       );
+      this.router.navigate(['flight-programs']);
     }
   }
 }

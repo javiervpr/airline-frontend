@@ -26,4 +26,9 @@ export class FlightProgramService {
   create(data: any) {
     return this.http.post<any>(this.flightProgramEndpoint, data);
   }
+
+  delete(id: number) {
+    const endpoint = `${this.flightProgramEndpoint}/${id}`;
+    return this.http.delete<any>(endpoint);
+  }
 }
