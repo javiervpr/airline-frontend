@@ -1,27 +1,43 @@
 <div class="container">
-  <div style="max-width: 400px;margin: auto;">
+  <div style="max-width: 400px; margin: auto">
     <div>
       <h4>Create Flight Program</h4>
-      <a routerLink="/flight-programs" style="padding-left: 0;" class="btn btn-link">Back to flight programs</a>
+      <a
+        routerLink="/flight-programs"
+        style="padding-left: 0"
+        class="btn btn-link"
+        >Back to flight programs</a
+      >
     </div>
-    <form>
+    <form
+      [formGroup]="flightProgramForm"
+      [ngClass]="this.submitted ? 'was-validated' : ''"
+    >
       <div class="mb-3">
         <label for="originAirport" class="form-label">Origin airport</label>
-        <select id="originAirport" class="form-select">
+        <select formControlName="sourceAirport" required id="originAirport" class="form-select">
           <option selected>Choose...</option>
-          <option *ngFor="let code of airportCodes" value="{{code}}">{{code}}</option>
+          <option *ngFor="let code of airportCodes" value="{{ code }}">
+            {{ code }}
+          </option>
         </select>
       </div>
       <div class="mb-3">
-        <label for="inputDestinyAirport" class="form-label">Destiny airport</label>
-        <select id="inputDestinyAirport" class="form-select">
+        <label for="inputDestinyAirport" class="form-label"
+          >Destiny airport</label
+        >
+        <select required formControlName="destinyAirport" required id="inputDestinyAirport" class="form-select">
           <option selected>Choose...</option>
-          <option *ngFor="let code of airportCodes" value="{{code}}">{{code}}</option>
+          <option *ngFor="let code of airportCodes" value="{{ code }}">
+            {{ code }}
+          </option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="mb-3">
+        <label for="flightCode" class="form-label">Flight code</label>
+        <input required formControlName="flightCode" type="text" class="form-control" id="flightCode">
+      </div>
+      <button (click)="onCreateSubmit()" class="btn btn-primary">Submit</button>
     </form>
-
   </div>
-
 </div>
