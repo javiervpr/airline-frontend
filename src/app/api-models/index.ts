@@ -8,3 +8,4 @@ export * as oldTicket from './flights/ticket';
 export * as OldSeat from './flights/avaible-seat';
 export * from './check-in/check-in';
 export * from './auth/jwt-response';
+export * from './passanger';

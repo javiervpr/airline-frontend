@@ -1,0 +1,31 @@
+
+<div>
+<h4>Pasajeros</h4>
+<a routerLink="/passangers/new"><button class="btn btn-success pull-right" > Nuevo Pasajero</button></a>
+</div>
+<hr>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Apellido</th>
+    <th scope="col">Documento
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let passanger of passangers; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>
+      {{passanger.name }}
+    </td>
+    <td>
+      {{ passanger.lastName }}
+    </td>
+    <td>
+      {{ passanger.passport }}
+    </td>
+  </tr>
+  </tbody>
+</table>

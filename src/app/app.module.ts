@@ -7,16 +7,21 @@ import {StateManagementModule} from "./state-management/state-management.module"
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FlightsPageComponent } from './pages/flights-page/flights-page.component';
+import { PassangersPageComponent } from './pages/passangers-page/passangers-page.component';
+import { PassangerFormComponent } from './pages/passanger-form/passanger-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckInComponent } from './pages/check-in/check-in.component';
 import { FlightDetailComponent } from './pages/flight-detail/flight-detail.component';
 import { LoginComponent } from './pages/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
 import {TokenInterceptorService} from "./api-http/auth/token-interceptor.service";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FlightsPageComponent,
+    PassangersPageComponent,
+    PassangerFormComponent,
     CheckInComponent,
     FlightDetailComponent,
     LoginComponent
@@ -27,6 +32,7 @@ import {TokenInterceptorService} from "./api-http/auth/token-interceptor.service
     StateManagementModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [
