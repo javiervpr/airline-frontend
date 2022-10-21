@@ -10,7 +10,7 @@ export class FlightProgramEffect {
 
   loadFlightPrograms$ = createEffect(() => this.actions$.pipe(
       ofType(FlightProgramActions.loadFlightPrograms),
-      mergeMap(() => this.flightProgramService.getAll()
+      mergeMap(() => this.flightProgramService.get()
         .pipe(
           map(flightPrograms => FlightProgramActions.loadFlightProgramsOnSuccess({flightPrograms})),
           catchError(() => EMPTY)
