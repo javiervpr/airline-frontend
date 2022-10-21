@@ -17,7 +17,7 @@
 
 <!--</div>-->
 <div>
-  <h4>Check-In for flight: <b>ER324GS</b></h4>
+  <h4>Check-In for flight: <b>{{flightId}}</b></h4>
   <hr>
   <div class="row">
     <div class="col-md-4">
@@ -28,25 +28,31 @@
           <select class="form-control"
                   formControlName="passenger"
                   (change)="selectPassenger()">
-            <option value="63d033bc-8c81-4476-9696-a59905b108b2">Javier Vaca Pereira</option>
+            <option *ngFor="let passenger of passengers"
+                    [value]="passenger.id">
+              {{passenger.name}} {{passenger.lastname}} - {{passenger.ci}}
+            </option>
           </select>
         </div>
 
         <!--        <button class="btn btn-outline-secondary mt-4" type="button" id="button-addon3">Button</button>-->
       </form>
 
-      <form class="form-control p-3 pt-2 mt-4 bg-light">
-
+      <form class="form-control p-3 pt-2 mt-4 bg-light" [formGroup]="seatForm">
+      <!--[value]="seatObjectSelected?.seatNo" -->
         <div style="display: flex;justify-content: space-between;align-items: center">
           <div>
             <label>Seat selected</label>
-            <input  class="form-control" disabled [value]="seatObjectSelected?.seatNo" style="width: 245px">
+            <input  formControlName="seat"
+                    class="form-control"
+
+                    style="width: 245px">
           </div>
           <div >
             <button class="btn btn-primary mt-4"
                     type="button"
                     id="button-addon1"
-                    [disabled]="!seatObjectSelected"
+                    [disabled]="!seatObjectSelected || passengerForm.invalid || seatForm.invalid"
                     (click)="assignSeat()">Confirm seat</button>
           </div>
         </div>
@@ -71,7 +77,7 @@
           </div>
         </div>
 
-        <div class="mt-2" *ngIf="baggages.length > 0">
+        <div class="mt-2" *ngIf="baggages && baggages.length > 0">
           <label>Baggages</label>
           <ul class="list-group">
             <li *ngFor="let baggage of baggages" class="list-group-item">

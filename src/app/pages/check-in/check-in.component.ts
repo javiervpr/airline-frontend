@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Baggage, CheckIn, FlightProgram, Seat} from "../../api-models";
+import {Baggage, CheckIn, FlightProgram, Passenger, Seat} from "../../api-models";
 import {filter, Subscription} from "rxjs";
 import {Store} from "@ngrx/store";
 import {getFlightProgramSelected} from "../../state-management/selectors";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CheckInService} from "../../api-http/check-in/check-in.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-check-in',
@@ -40,17 +41,44 @@ export class CheckInComponent implements OnInit {
   passengerForm = new FormGroup({
     passenger: new FormControl('', [Validators.required]),
   });
+  seatForm = new FormGroup({
+    seat: new FormControl('', [Validators.required]),
+  });
 
   checkIn?: CheckIn;
-
+  passengers: Passenger[] = [];
+  flightId = '';
+  availableSeats: Seat[] = [];
 
   constructor(
     private readonly store: Store,
-    private checkInService: CheckInService
+    private checkInService: CheckInService,
+    private route: ActivatedRoute
   ) {
   }
 
+  getPassengers(): void {
+    this.checkInService.getPassengers().subscribe(
+      passengers => this.passengers = passengers,
+      error => console.log
+    );
+  }
+
+  getSeatsByFlifhtId(flightId: string): void {
+    this.checkInService.getSeatsByFlightId(this.flightId).subscribe(
+      seats => {
+        this.availableSeats = seats;
+        this.blockSeats();
+      },
+      error => console.log
+    );
+  }
+
   ngOnInit(): void {
+    this.flightId = this.route.snapshot.paramMap.get('flightId')!;
+    this.getSeatsByFlifhtId(this.flightId);
+    this.getPassengers();
+
     const flightSubscription = this.store.select(getFlightProgramSelected)
       .pipe(filter(flightProgram => !!flightProgram))
       .subscribe(flightProgram => {
@@ -127,22 +155,7 @@ export class CheckInComponent implements OnInit {
         ];
         this.processSeatChart(this.seatConfig);
         this.blockSeats();
-
-        //
-
-        //
-
       });
-
-    this.checkInService.getCheckIn('c8adfb37-8c45-46a4-8956-88a648dd2c88', '63d033bc-8c81-4476-9696-a59905b108b2')
-      .subscribe(checkIn => {
-        this.checkIn = checkIn;
-        this.baggages = checkIn.baggages;
-        this.setBookedSeat(checkIn.seat.rowColumn);
-        // this.seatObjectSelected['seatNo'] = checkIn.seat.rowColumn;
-        console.log(checkIn);
-      }, error => console.log);
-
 
     this.subscriptions.add(flightSubscription);
 
@@ -154,7 +167,7 @@ export class CheckInComponent implements OnInit {
   }
 
   existCheckIn(): boolean {
-    return !(this.checkIn == null || this.checkIn.checkInId == null);
+    return !(this.checkIn == null || this.checkIn.checkInId == null || this.checkIn.checkInId === '');
   }
 
   addBaggage() {
@@ -162,7 +175,7 @@ export class CheckInComponent implements OnInit {
     this.baggages.push(baggage);
     const create = this.existCheckIn();
     this.checkInService
-      .tagBaggageAndCreateCheckIn('c8adfb37-8c45-46a4-8956-88a648dd2c88', [baggage], '63d033bc-8c81-4476-9696-a59905b108b2', create)
+      .tagBaggageAndCreateCheckIn(this.flightId, [baggage], this.passengerForm.value.passenger!, create)
       .subscribe(result => console.log,
         error => console.log);
     this.baggageForm.reset();
@@ -172,19 +185,64 @@ export class CheckInComponent implements OnInit {
   assignSeat() {
     const create = this.existCheckIn();
     console.log(this.seatObjectSelected, 'cre', create);
-    const seat = this.flightProgram?.information.avaibleSeats
+    // let seat = this.flightProgram?.information.avaibleSeats
+    //   .filter(seat => seat.rowColumn === this.seatObjectSelected.key);
+    let seat = this.availableSeats
       .filter(seat => seat.rowColumn === this.seatObjectSelected.key);
     console.log('SEAT', seat, seat![0]);
     if (!seat || seat!.length == 0)
       return;
     this.checkInService
-      .assignSeatAndCreateCheckIn('c8adfb37-8c45-46a4-8956-88a648dd2c88', seat![0], '63d033bc-8c81-4476-9696-a59905b108b2', create)
-      .subscribe(result => console.log,
+      .assignSeatAndCreateCheckIn(this.flightId, seat![0], this.passengerForm.value.passenger!, create)
+      .subscribe(result => {
+
+        console.log
+        },
         error => console.log);
+
   }
 
   selectPassenger() {
     console.log(this.passengerForm.value);
+    this.seatForm.reset();
+    this.getSeatsByFlifhtId(this.flightId);
+    this.checkInService.getCheckIn(this.flightId, this.passengerForm.value.passenger!)
+      .subscribe(checkIn => {
+
+        if (checkIn.checkInId == null) {
+          if (this.checkIn != null && this.checkIn.checkInId != null)
+            this.checkIn.checkInId = '';
+
+          this.baggages = [];
+          //
+          if (this.seatObjectSelected && this.seatObjectSelected.status) {
+            this.seatObjectSelected.status = "FREE";
+            this.cleanSelectedSeat(this.seatObjectSelected.key);
+          }
+
+          const seatLabelText = (this.seatObjectSelected == null || false) ? '' : this.seatObjectSelected.seatLabel;
+          const seatIndex = this.cart.selectedSeats.indexOf(seatLabelText);
+          if (seatIndex > -1) {
+            this.cart.selectedSeats.splice(seatIndex, 1);
+            this.cart.seatstoStore.splice(seatIndex, 1);
+          }
+          this.blockSeats();
+          // this.seatObjectSelected.seatNo = undefined;
+          //
+          return;
+        }
+
+        this.checkIn = checkIn;
+        this.baggages = checkIn.baggages;
+        if (this.seatObjectSelected)
+          this.cleanSelectedSeat(this.seatObjectSelected.key);
+
+        this.blockSeats();
+        this.setBookedSeat(checkIn.seat.rowColumn);
+        this.seatObjectSelected = undefined;
+        // this.seatObjectSelected['seatNo'] = checkIn.seat.rowColumn;
+        console.log(checkIn);
+      }, error => console.log);
   }
 
   public processSeatChart(map_data: any[]) {
@@ -255,6 +313,7 @@ export class CheckInComponent implements OnInit {
       this.cart.selectedSeats.push(seatObject.seatLabel);
       this.cart.seatstoStore.push(seatObject.key);
       this.cart.totalamount += seatObject.price;
+      this.seatForm.setValue({ seat: seatObject.seatNo});
 
       if (this.seatObjectSelected && this.seatObjectSelected !== seatObject) {
         this.seatObjectSelected.status = "FREE";
@@ -274,11 +333,14 @@ export class CheckInComponent implements OnInit {
         this.cart.seatstoStore.splice(seatIndex, 1);
         this.cart.totalamount -= seatObject.price;
       }
+      this.seatForm.reset();
     }
   }
 
   public blockSeats() {
-    const seatsToBlock = this.flightProgram?.information.avaibleSeats
+    // const seatsToBlock = this.flightProgram?.information.avaibleSeats
+    debugger;
+    const seatsToBlock = this.availableSeats
       .filter(seat => seat.rowColumn && seat.status === 'BOOKED')
       .map(seat => seat.rowColumn)
       .join(",");
@@ -311,7 +373,8 @@ export class CheckInComponent implements OnInit {
   }
 
   public setBookedSeat(seatsToBook: string) {
-    if (seatsToBook != "") {
+    console.log(seatsToBook);
+    if (seatsToBook != null && seatsToBook != "") {
       const seatsToBlockArr = seatsToBook!.split(",");
       for (let index = 0; index < seatsToBlockArr.length; index++) {
         const seat = seatsToBlockArr[index] + "";
@@ -324,6 +387,37 @@ export class CheckInComponent implements OnInit {
             if (seatObj) {
               console.log("\n\n\nFount Seat to block: ", seatObj);
               seatObj["status"] = "BOOKED";
+              this.seatmap[index2]["seats"][
+              parseInt(seatSplitArr[1]) - 1
+                ] = seatObj;
+              this.seatObjectSelected = seatObj;
+              console.log("\n\n\nSeat Obj", seatObj);
+              console.log(
+                this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]
+              );
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public cleanSelectedSeat(seatsToBook: string) {
+    console.log(seatsToBook);
+    if (seatsToBook != null && seatsToBook != "") {
+      const seatsToBlockArr = seatsToBook!.split(",");
+      for (let index = 0; index < seatsToBlockArr.length; index++) {
+        const seat = seatsToBlockArr[index] + "";
+        const seatSplitArr = seat.split("_");
+        console.log("Split seat: ", seatSplitArr);
+        for (let index2 = 0; index2 < this.seatmap.length; index2++) {
+          const element = this.seatmap[index2];
+          if (element.seatRowLabel == seatSplitArr[0]) {
+            var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
+            if (seatObj) {
+              console.log("\n\n\nFount Seat to block: ", seatObj);
+              seatObj["status"] = "FREE";
               this.seatmap[index2]["seats"][
               parseInt(seatSplitArr[1]) - 1
                 ] = seatObj;

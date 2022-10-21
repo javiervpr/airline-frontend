@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {mergeMap, Observable} from "rxjs";
-import {Baggage, CheckIn, Seat} from "../../api-models";
+import {forkJoin, mergeMap, Observable} from "rxjs";
+import {Baggage, CheckIn, Passenger, Seat} from "../../api-models";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -66,5 +66,13 @@ export class CheckInService {
     return this.createCheckIn(flightId, passengerId).pipe(
       mergeMap(checkIn => this.tagBaggage(flightId, baggages, passengerId))
     );
+  }
+
+  getPassengers(): Observable<Passenger[]> {
+    return this.http.get<Passenger[]>(`http://localhost:8082/passenger`);
+  }
+
+  getSeatsByFlightId(flightId: string): Observable<Seat[]> {
+    return this.http.get<Seat[]>(`http://localhost:8082/seats/${flightId}`);
   }
 }
