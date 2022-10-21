@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'flights/:flightId', component: FlightDetailComponent, canActivate: [AuthGuard]},
   {path: 'check-in/:flightId', component: CheckInComponent, canActivate: [AuthGuard]},
   {path: 'flight-programs/new', component: FlightProgramFormComponent},
+  {path: 'flight-programs/edit/:id', component: FlightProgramFormComponent},
   {path: 'flight-programs', component: FlightProgramPageComponent},
 ];
 

@@ -4,6 +4,7 @@ import { FlightProgramService } from 'src/app/api-http/flight-program/flight-pro
 import { airportCodes } from 'src/app/utils/airport-codes';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-program-page',
@@ -17,7 +18,8 @@ export class FlightProgramPageComponent implements OnInit {
   constructor(
     private flightProgramService: FlightProgramService,
     private confirmationService: ConfirmationService,
-    private messageService:MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,10 @@ export class FlightProgramPageComponent implements OnInit {
     this.loading = false;
   }
 
+  edit(id: number) {
+    this.router.navigate([`flight-programs/edit/${id}`]);
+  }
+
   async onDelete(id: number) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
@@ -46,7 +52,12 @@ export class FlightProgramPageComponent implements OnInit {
           this.flightProgramService.delete(id)
         );
 
-        this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Created',
+          life: 3000,
+        });
         this.getFlightPrograms();
       },
     });
