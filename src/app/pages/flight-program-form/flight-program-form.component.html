@@ -1,0 +1,27 @@
+<div class="container">
+  <div style="max-width: 400px;margin: auto;">
+    <div>
+      <h4>Create Flight Program</h4>
+      <a routerLink="/flight-programs" style="padding-left: 0;" class="btn btn-link">Back to flight programs</a>
+    </div>
+    <form>
+      <div class="mb-3">
+        <label for="originAirport" class="form-label">Origin airport</label>
+        <select id="originAirport" class="form-select">
+          <option selected>Choose...</option>
+          <option *ngFor="let code of airportCodes" value="{{code}}">{{code}}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="inputDestinyAirport" class="form-label">Destiny airport</label>
+        <select id="inputDestinyAirport" class="form-select">
+          <option selected>Choose...</option>
+          <option *ngFor="let code of airportCodes" value="{{code}}">{{code}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+
+</div>
