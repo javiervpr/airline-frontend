@@ -1,0 +1,20 @@
+{
+    "destinyId": "VVI",
+    "originId": "LPZ",
+    "flightNumber": "22",
+    "departureTime": "2022-09-14 00:00:00",
+    "arrivalTime": "2022-09-15 00:00:00",
+    "flightTime": "2022-09-15 00:00:00",
+    "tickets": [
+        {
+            "clase": "turist",
+            "price": 50,
+            "quant": 1
+        },
+        {
+            "clase": "first",
+            "price": 120,
+            "quant": 1
+        }
+    ]
+}

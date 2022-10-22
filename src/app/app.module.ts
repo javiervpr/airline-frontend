@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FlightsPageComponent } from './pages/flights-page/flights-page.component';
 import { PassangersPageComponent } from './pages/passangers-page/passangers-page.component';
 import { PassangerFormComponent } from './pages/passanger-form/passanger-form.component';
+import { BookingFormComponent } from './pages/booking-form/booking-form.component';
 import { FlightProgramFormComponent } from './pages/flight-program-form/flight-program-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckInComponent } from './pages/check-in/check-in.component';
@@ -39,6 +40,7 @@ import { FlightDetailsComponent } from './pages/flight-details/flight-details.co
     FlightsPageComponent,
     PassangersPageComponent,
     PassangerFormComponent,
+    BookingFormComponent,
     FlightProgramFormComponent,
     CheckInComponent,
     FlightDetailComponent,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookingFormComponent } from './pages/booking-form/booking-form.component';
 import { FlightProgramFormComponent } from './pages/flight-program-form/flight-program-form.component';
 import {FlightsPageComponent} from "./pages/flights-page/flights-page.component";
 import { PassangerFormComponent } from './pages/passanger-form/passanger-form.component';
@@ -17,6 +18,9 @@ import { FlightDetailsComponent } from './pages/flight-details/flight-details.co
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'flights', component: FlightsPageComponent},
+  {path: 'passangers', component: PassangersPageComponent},
+  {path: 'passangers/new', component: PassangerFormComponent},
+  {path: 'booking/new', component: BookingFormComponent},
   {path: 'passangers', component: PassangersPageComponent,canActivate: [AuthGuard]},
   {path: 'passangers/new', component: PassangerFormComponent,canActivate: [AuthGuard]},
   {path: 'flights/:flightId', component: FlightDetailComponent, canActivate: [AuthGuard]},
