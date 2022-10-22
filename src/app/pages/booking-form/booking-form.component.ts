@@ -55,7 +55,7 @@ export class BookingFormComponent implements OnInit {
     //     console.log(data)
     //   }))
     console.log(JSON.stringify(this.booking))
-      this.http.post<Booking>('http://localhost:3000/api/booking',
+      this.http.post<Booking>('http://54.165.101.228:3000/api/booking',
       this.booking
       ).subscribe(
         (response)=>{

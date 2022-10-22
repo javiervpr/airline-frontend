@@ -12,7 +12,7 @@ export class FlightBookingService {
   ) { }
 
   getAll() {
-    return this.http.get<FlightBooking[]>('http://54.165.101.228:3000/api/passanger');
+    return this.http.get<FlightBooking[]>('http://54.165.101.228:3000/api/flight');
   }
 
 }
