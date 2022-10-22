@@ -12,6 +12,7 @@ import { FlightProgramPageComponent } from './pages/flight-program-page/flight-p
 import { FlightFormComponent } from './pages/flight-form/flight-form.component';
 import { FlightAdminComponent } from './pages/flight-admin/flight-admin.component';
 import { FlightEnableComponent } from './pages/flight-enable/flight-enable.component';
+import { FlightDetailsComponent } from './pages/flight-details/flight-details.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'flight-programs/new', component: FlightProgramFormComponent},
   {path: 'flight-programs/edit/:id', component: FlightProgramFormComponent},
   {path: 'flight/enable/:id', component: FlightEnableComponent},
+  {path: 'flight/detail/:id', component: FlightDetailsComponent},
   {path: 'flight-programs', component: FlightProgramPageComponent},
 ];
 

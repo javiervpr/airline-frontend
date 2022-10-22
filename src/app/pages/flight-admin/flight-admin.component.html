@@ -135,13 +135,25 @@
         <span class="p-column-title">End Date</span>
         <span class="text-uppercase">{{ flight.status }}</span>
       </td>
-      <td style="text-align: center">
+      <td style="text-align: center" *ngIf="flight.status === 'pending'">
         <button
           (click)="enableFlight(flight.id)"
           pButton
           type="button"
           label="Enable"
           class="p-button-primary"
+        ></button>
+      </td>
+      <td
+        style="text-align: center"
+        *ngIf=" flight.status === 'active'"
+      >
+        <button
+          (click)="enableFlight(flight.id)"
+          pButton
+          type="button"
+          label="Cancel"
+          class="p-button-danger"
         ></button>
       </td>
     </tr>

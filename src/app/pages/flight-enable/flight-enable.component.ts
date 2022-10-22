@@ -67,10 +67,12 @@ export class FlightEnableComponent implements OnInit {
     const tickets = this.generateTickets();
     data.startTime = '20220101';
     data.endTime = '20220101';
+    data.status = 'active'
     data.information = { avaibleSeats, tickets: tickets };
     const response = await lastValueFrom(
       this.flightApiService.bulkEnable({ data: [data] })
     );
+    this.router.navigate([`flight/detail/${this.flight.id}`])
   }
 
   generateTickets() {
