@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import { FlightProgramActions, PassangerActions} from './state-management/actions';
+import { FlightBookingActions, FlightProgramActions, PassangerActions} from './state-management/actions';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.store.dispatch(FlightBookingActions.loadFlightBookings());
     this.store.dispatch(FlightProgramActions.loadFlightPrograms());
     this.store.dispatch(PassangerActions.loadPassangers());
   }

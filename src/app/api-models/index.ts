@@ -7,4 +7,5 @@ export * from './aircraft';
 export * from './ticket';
 export * from './avaible-seat';
 export * from './passanger';
-
+export * from './flight-booking'
+export * from './booking'

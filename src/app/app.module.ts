@@ -10,13 +10,15 @@ import { FlightsPageComponent } from './pages/flights-page/flights-page.componen
 import { PassangersPageComponent } from './pages/passangers-page/passangers-page.component';
 import { PassangerFormComponent } from './pages/passanger-form/passanger-form.component';
 import { FormsModule } from '@angular/forms';
+import { BookingFormComponent } from './pages/booking-form/booking-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlightsPageComponent,
     PassangersPageComponent,
-    PassangerFormComponent
+    PassangerFormComponent,
+    BookingFormComponent
   ],
   imports: [
     BrowserModule,

@@ -12,16 +12,13 @@ export class PassangerService {
   ) { }
 
   getAll() {
-    return this.http.get<Passanger[]>('http://localhost:3000/api/passanger');
+    return this.http.get<Passanger[]>('http://54.165.101.228:3000/api/passanger');
   }
 
   post(body: Passanger) {
-    return this.http.post<Passanger>('http://localhost:3000/api/passanger',
+    return this.http.post<Passanger>('http://54.165.101.228:3000/api/passanger',
     body
     );
   }
-
-
-
 
 }

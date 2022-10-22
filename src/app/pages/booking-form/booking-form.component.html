@@ -1,0 +1,18 @@
+<h4>Nueva Reserva</h4>
+
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Seleccione el vuelo</label>
+    <select [(ngModel)]="booking.flight" class="form-control" id="bookings" [ngModelOptions]="{standalone: true}">
+      <option [value]="item.id" *ngFor="let item of flightBookings">{{item.id || ''}} - {{item.flightNumber }} - {{item.originId}} - {{item.destinyId}}  </option>
+    </select>
+
+    <label for="exampleFormControlSelect2">Seleccione el pasajero</label>
+    <select [(ngModel)]="booking.passanger" class="form-control" id="passangers" [ngModelOptions]="{standalone: true}">
+      <option [value]="item.id" *ngFor="let item of passangers">{{item.id || ''}} - {{item.name }} - {{item.lastName}} </option>
+    </select>
+
+      <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
+</div>
+</form>
+
