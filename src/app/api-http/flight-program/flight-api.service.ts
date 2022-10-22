@@ -13,4 +13,8 @@ export class FlightApiService {
    bulkInsert(data:any){
     return this.client.post(`${environment.baseUrl}/api/flight/bulk`,data)
    }
+
+   getAll(){
+    return this.client.get(`${environment.baseUrl}/api/flight`)
+   }
 }

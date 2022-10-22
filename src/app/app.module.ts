@@ -29,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FlightFormComponent } from './pages/flight-form/flight-form.component';
 import { CalendarModule } from 'primeng/calendar';
+import { FlightAdminComponent } from './pages/flight-admin/flight-admin.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CalendarModule } from 'primeng/calendar';
     LoginComponent,
     FlightProgramPageComponent,
     FlightFormComponent,
+    FlightAdminComponent,
   ],
   imports: [
     BrowserModule,
