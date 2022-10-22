@@ -9,6 +9,7 @@ import {FlightDetailComponent} from "./pages/flight-detail/flight-detail.compone
 import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
 import { FlightProgramPageComponent } from './pages/flight-program-page/flight-program-page.component';
+import { FlightFormComponent } from './pages/flight-form/flight-form.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'passangers/new', component: PassangerFormComponent,canActivate: [AuthGuard]},
   {path: 'flights/:flightId', component: FlightDetailComponent, canActivate: [AuthGuard]},
   {path: 'check-in/:flightId', component: CheckInComponent, canActivate: [AuthGuard]},
+  {path: 'flight/new', component: FlightFormComponent},
   {path: 'flight-programs/new', component: FlightProgramFormComponent},
   {path: 'flight-programs/edit/:id', component: FlightProgramFormComponent},
   {path: 'flight-programs', component: FlightProgramPageComponent},

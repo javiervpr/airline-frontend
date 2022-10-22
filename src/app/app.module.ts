@@ -27,6 +27,7 @@ import {MessageModule} from 'primeng/message';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { FlightFormComponent } from './pages/flight-form/flight-form.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MessageService } from 'primeng/api';
     FlightDetailComponent,
     LoginComponent,
     FlightProgramPageComponent,
+    FlightFormComponent,
   ],
   imports: [
     BrowserModule,
