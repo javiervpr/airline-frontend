@@ -22,13 +22,13 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
-import {ToolbarModule} from 'primeng/toolbar';
-import {ToastModule} from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FlightFormComponent } from './pages/flight-form/flight-form.component';
-
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -60,6 +60,7 @@ import { FlightFormComponent } from './pages/flight-form/flight-form.component';
     MessageModule,
     ToolbarModule,
     ReactiveFormsModule,
+    CalendarModule,
   ],
   providers: [
     {
@@ -68,7 +69,7 @@ import { FlightFormComponent } from './pages/flight-form/flight-form.component';
       multi: true,
     },
     ConfirmationService,
-    MessageService
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

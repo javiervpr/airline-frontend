@@ -1,1 +1,92 @@
-<p>flight-form works!</p>
+<div style="max-width: 600px; margin: auto">
+  <h2>Create Flights</h2>
+  <a routerLink="/flights">Back to Flights</a>
+  <form
+    (ngSubmit)="onSubmit()"
+    #flightForm="ngForm"
+    [ngClass]="this.submitted ? 'was-validated' : ''"
+    class="row g-3 mt-3"
+  >
+    <div class="col-md-12">
+      <label for="inputState" class="form-label">Flight Program</label>
+      <select
+        required
+        [(ngModel)]="flight.flightProgramId"
+        id="inputState"
+        name="flightProgramId"
+        class="form-select"
+      >
+        <option value="" selected>Choose...</option>
+        <option *ngFor="let program of flightPrograms" value="{{ program.id }}">
+          Code {{ program.flightCode }} -- {{ program.sourceAirport }} to
+          {{ program.destinyAirport }}
+        </option>
+      </select>
+    </div>
+    <div class="row g-3">
+      <div class="field col-4">
+        <label for="timeonly" class="form-label d-block">Start time</label>
+        <p-calendar
+          required=""
+          [(ngModel)]="flight.startTime"
+          [timeOnly]="true"
+          name="startTime"
+          [hourFormat]="12"
+          inputId="timeonly"
+        ></p-calendar>
+      </div>
+
+      <div class="col-md-4">
+        <label for="inputAddress2" class="form-label"
+          >Flight duration minutes</label
+        >
+        <input
+          required=""
+          [(ngModel)]="flight.durationMinutes"
+          type="number"
+          name="durationHours"
+          class="form-control"
+          id="inputAddress2"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <label for="inputState" class="form-label">Days Departing </label>
+      <select
+        multiple
+        required
+        [(ngModel)]="flight.daysDeparting"
+        id="inputState"
+        name="daysDeparting"
+        class="form-select"
+      >
+        <option>Select a day</option>
+        <option *ngFor="let day of weekDays" value="{{ day.value }}">
+          {{ day.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="field col-12">
+      <label for="range" class="d-block">Range</label>
+      <p-calendar
+        required
+        [(ngModel)]="flight.range"
+        selectionMode="range"
+        name="range"
+        [readonlyInput]="true"
+        inputId="range"
+      ></p-calendar>
+    </div>
+    <div class="col-12">
+      <button
+        [disabled]="!flightForm.form.valid"
+        type="submit"
+        class="btn btn-primary"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
