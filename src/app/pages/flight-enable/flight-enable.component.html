@@ -1,0 +1,56 @@
+<a routerLink="/flight/admin">Back to Flights</a>
+<form
+  [formGroup]="form"
+  [ngClass]="this.submitted ? 'was-validated' : ''"
+  class="row g-3"
+>
+  <div class="col-md-6">
+    <label for="inputState" class="form-label">Crew</label>
+    <select
+      required
+      formControlName="crewUuid"
+      id="inputState"
+      class="form-select"
+    >
+      <option selected>Choose...</option>
+      <option *ngFor="let item of crew" value="{{ item.value }}">
+        {{ item.label }}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="inputState" class="form-label">Aircraft</label>
+    <select
+      required
+      formControlName="aircraftUuid"
+      id="inputState"
+      class="form-select"
+    >
+      <option selected>Choose...</option>
+      <option *ngFor="let item of aircrafts" value="{{ item.value }}">
+        {{ item.label }}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="inputAddress" class="form-label">Flight Number</label>
+    <input
+      required
+      formControlName="flightNumber"
+      type="text"
+      class="form-control"
+      id="inputAddress"
+    />
+  </div>
+  <div class="col-md-4">
+    <button (click)="generateCode()" class="btn btn-primary mt-4">
+      Generate Code
+    </button>
+  </div>
+
+  <div class="col-12">
+    <button (click)="onSubmit()" type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </div>
+</form>

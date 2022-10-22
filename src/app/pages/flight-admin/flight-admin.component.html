@@ -1,0 +1,166 @@
+<p-table
+  #dt
+  [value]="flights"
+  dataKey="id"
+  styleClass="p-datatable-customers"
+  [rowHover]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="[
+    'flight_program.flightCode',
+    'flight_program.sourceAirport',
+    'flight_program.destinyAirport'
+  ]"
+>
+  <ng-template pTemplate="caption">
+    <div class="Flights-header">
+      List of Flights
+      <span class="p-input-icon-left">
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="flight_program.flightCode">
+        <div class="flex justify-content-between align-items-center">
+          Flight Code
+          <p-sortIcon field="flight_program.flightCode"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="flight_program.flightCode"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="flight_program.sourceAirport">
+        <div class="flex justify-content-between align-items-center">
+          Source Airport
+          <p-sortIcon field="flight_program.sourceAirport"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="flight_program.sourceAirport"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="flight_program.destinyAirport">
+        <div class="flex justify-content-between align-items-center">
+          Destiny Airport
+          <p-sortIcon field="flight_program.destinyAirport"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="flight_program.destinyAirport"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="scheduledStartTime">
+        <div class="flex justify-content-between align-items-center">
+          Date
+          <p-sortIcon field="scheduledStartTime"></p-sortIcon>
+          <p-columnFilter
+            type="date"
+            field="scheduledStartTime"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="scheduledEndTime">
+        <div class="flex justify-content-between align-items-center">
+          End Date
+          <p-sortIcon field="scheduledEndTime"></p-sortIcon>
+          <p-columnFilter
+            type="date"
+            field="scheduledEndTime"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="status">
+        <div class="flex justify-content-between align-items-center">
+          Status
+          <p-sortIcon field="status"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="status"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+
+      <th style="width: 8rem"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-flight>
+    <tr class="p-selectable-row">
+      <td>
+        <span class="p-column-title">Fligth Code</span>
+        {{ flight.flight_program.flightCode }}
+      </td>
+      <td>
+        <span class="p-column-title">Origin airport</span>
+        {{ flight.flight_program.sourceAirport }}
+      </td>
+      <td>
+        <span class="p-column-title">Destiny airport</span>
+        {{ flight.flight_program.destinyAirport }}
+      </td>
+      <td>
+        <span class="p-column-title">Start Date</span>
+        {{ flight.scheduledStartTime }}
+      </td>
+      <td>
+        <span class="p-column-title">End Date</span>
+        {{ flight.scheduledEndTime }}
+      </td>
+      <td>
+        <span class="p-column-title">End Date</span>
+        <span class="text-uppercase">{{ flight.status }}</span>
+      </td>
+      <td style="text-align: center" *ngIf="flight.status === 'pending'">
+        <button
+          (click)="enableFlight(flight.id)"
+          pButton
+          type="button"
+          label="Enable"
+          class="p-button-primary"
+        ></button>
+      </td>
+      <td
+        style="text-align: center"
+        *ngIf=" flight.status === 'active'"
+      >
+        <button
+          (click)="enableFlight(flight.id)"
+          pButton
+          type="button"
+          label="Cancel"
+          class="p-button-danger"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No customers found.</td>
+    </tr>
+  </ng-template>
+</p-table>

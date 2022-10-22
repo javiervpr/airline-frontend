@@ -1,0 +1,11 @@
+<h2>Flight Details</h2>
+<a routerLink="/flight/admin">Back to Flights</a>
+
+<div class="card mt-3" style="max-width: 400px;">
+  <div class="card-header">
+    Featured
+  </div>
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let item of flight | keyvalue" class="list-group-item"><strong class="me-2">{{item.key}}: </strong>{{item.value}}</li>
+  </ul>
+</div>

@@ -1,0 +1,27 @@
+<form [formGroup]="loginForm"
+      class="form-control m-4 p-4 bg-light bg-gradient"
+      (ngSubmit)="login()">
+  <div class="">
+    <label>User</label>
+    <input
+      formControlName="user"
+      type="text"
+      placeholder="Write your user"
+      class="form-control">
+  </div>
+
+  <div class="">
+    <label>Password</label>
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="Write your password"
+      class="form-control">
+  </div>
+
+  <div>
+
+  </div>
+
+  <button class="btn btn-outline-success mt-4" type="submit" id="button-addon1" [disabled]="!loginForm.valid">Login</button>
+</form>
