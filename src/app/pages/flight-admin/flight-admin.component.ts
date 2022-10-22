@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { FlightApiService } from 'src/app/api-http/flight-program/flight-api.service';
+import { FlightApiService } from 'src/app/api-http/flight/flight-api.service';
 
 @Component({
   selector: 'app-flight-admin',
@@ -10,7 +11,7 @@ import { FlightApiService } from 'src/app/api-http/flight-program/flight-api.ser
 export class FlightAdminComponent implements OnInit {
   flights: any = [];
   loading = false;
-  constructor(private flightApiService: FlightApiService) {}
+  constructor(private flightApiService: FlightApiService,private router:Router) {}
 
   ngOnInit(): void {
     this.getFlihgts()
@@ -20,6 +21,9 @@ export class FlightAdminComponent implements OnInit {
     this.loading = true;
     this.flights = await lastValueFrom(this.flightApiService.getAll());
     this.loading = false;
-    console.log(this.flights)
+  }
+
+  enableFlight(flightId: number) {
+    this.router.navigate([`flight/enable/${flightId}`]);
   }
 }

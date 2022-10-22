@@ -30,6 +30,7 @@ import { MessageService } from 'primeng/api';
 import { FlightFormComponent } from './pages/flight-form/flight-form.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FlightAdminComponent } from './pages/flight-admin/flight-admin.component';
+import { FlightEnableComponent } from './pages/flight-enable/flight-enable.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FlightAdminComponent } from './pages/flight-admin/flight-admin.componen
     FlightProgramPageComponent,
     FlightFormComponent,
     FlightAdminComponent,
+    FlightEnableComponent,
   ],
   imports: [
     BrowserModule,

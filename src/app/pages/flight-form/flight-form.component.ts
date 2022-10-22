@@ -4,7 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { FlightProgramService } from 'src/app/api-http/flight-program/flight-program.service';
 import { weekDays } from './utils';
 import * as moment from 'moment-timezone';
-import { FlightApiService } from 'src/app/api-http/flight-program/flight-api.service';
+import { FlightApiService } from 'src/app/api-http/flight/flight-api.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -111,7 +111,6 @@
   </ng-template>
   <ng-template pTemplate="body" let-flight>
     <tr class="p-selectable-row">
-
       <td>
         <span class="p-column-title">Fligth Code</span>
         {{ flight.flight_program.flightCode }}
@@ -138,6 +137,7 @@
       </td>
       <td style="text-align: center">
         <button
+          (click)="enableFlight(flight.id)"
           pButton
           type="button"
           label="Enable"
