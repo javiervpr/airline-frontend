@@ -16,6 +16,10 @@ export class FlightApiService {
     return this.client.get(`${environment.baseUrl}/api/flight`);
   }
 
+  cancel(id:number) {
+    return this.client.patch(`${environment.baseUrl}/api/flight/cancel/${id}`,null);
+  }
+
   edit(flightId: number) {
     return this.client.get<any>(
       `${environment.baseUrl}/api/flight?id=${flightId}`
@@ -25,5 +29,10 @@ export class FlightApiService {
 
   bulkEnable(data: any) {
     return this.client.post(`${environment.baseUrl}/api/flight/bulk_enable`, data);
+  }
+
+
+  getItineraries(){
+    return this.client.get(`${environment.baseUrl}/api/itinerary`)
   }
 }
