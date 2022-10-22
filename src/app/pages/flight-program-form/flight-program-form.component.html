@@ -13,6 +13,20 @@
       [formGroup]="flightProgramForm"
       [ngClass]="this.submitted ? 'was-validated' : ''"
     >
+    <div class="mb-3">
+      <label for="originAirport" class="form-label">Itinerary</label>
+      <select
+        formControlName="itineraryId"
+        required
+        id="originAirport"
+        class="form-select"
+      >
+        <option selected>Choose...</option>
+        <option *ngFor="let item of itineraries" value="{{ item.id }}">
+          Itinerario {{item.id  }} from {{item.sourceAirport}} to {{item.destinyAirport}}
+        </option>
+      </select>
+    </div>
       <div class="mb-3">
         <label for="originAirport" class="form-label">Origin airport</label>
         <select
@@ -46,6 +60,7 @@
       </div>
       <div class="mb-3">
         <label for="flightCode" class="form-label">Flight code</label>
+
         <input
           required
           formControlName="flightCode"
@@ -53,7 +68,9 @@
           class="form-control"
           id="flightCode"
         />
+        <button (click)="generateCode()" class="btn btn-primary btn-sm">Generate Code</button>
       </div>
+
       <button (click)="onCreateSubmit()" class="btn btn-primary">Submit</button>
     </form>
   </div>

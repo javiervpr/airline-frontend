@@ -69,6 +69,8 @@ export class FlightEnableComponent implements OnInit {
     data.endTime = '20220101';
     data.status = 'active'
     data.information = { avaibleSeats, tickets: tickets };
+    console.log("dataInformaiton",data.information)
+    debugger
     const response = await lastValueFrom(
       this.flightApiService.bulkEnable({ data: [data] })
     );
@@ -87,6 +89,7 @@ export class FlightEnableComponent implements OnInit {
       price: this.getRandomArbitrary(150, 500),
       quant: this.getRandomArbitrary(5, 20),
     });
+    return results
   }
 
   getRandomArbitrary(min: any, max: any) {
