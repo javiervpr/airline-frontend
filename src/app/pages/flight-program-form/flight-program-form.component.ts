@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { FlightProgramService } from 'src/app/api-http/flight-program/flight-program.service';
+import { FlightApiService } from 'src/app/api-http/flight/flight-api.service';
 import { airportCodes } from 'src/app/utils/airport-codes';
 
 @Component({
@@ -16,18 +17,22 @@ export class FlightProgramFormComponent implements OnInit {
     destinyAirport: ['', Validators.required],
     flightCode: ['', Validators.required],
     id: [''],
+    itineraryId:['']
   });
   submitted = false;
   flightProgramId = null;
+  itineraries:any = []
 
   constructor(
     private formBuilder: FormBuilder,
     private flightProgramsService: FlightProgramService,
+    private flightApiService:FlightApiService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.getItineraries()
     this.route.params.subscribe((value: any) => {
       if (value.id) {
         this.flightProgramId = value.id;
@@ -49,11 +54,14 @@ export class FlightProgramFormComponent implements OnInit {
     }
   }
 
+  async getItineraries(){
+    this.itineraries = await lastValueFrom( this.flightApiService.getItineraries())
+  }
+
   async onCreateSubmit() {
     this.submitted = true;
     if (this.flightProgramForm.valid) {
       let data: any = this.flightProgramForm.value;
-      data.itineraryId = 1;
       if (data.id) {
         const id = data.id;
         delete data.id;
@@ -65,6 +73,21 @@ export class FlightProgramFormComponent implements OnInit {
       );
       this.router.navigate(['flight-programs']);
     }
+  }
+
+  public generateCode() {
+    const airlines = ['BOA', 'AMAZ', 'LATAM', 'COPA'];
+    const prefix = airlines[this.getRandomInt(airlines.length - 1)];
+    const code =
+      prefix +
+      this.getRandomInt(9) +
+      this.getRandomInt(9) +
+      this.getRandomInt(9);
+    this.flightProgramForm.patchValue({ flightCode: code });
+  }
+
+  getRandomInt(max:any) {
+    return Math.floor(Math.random() * max);
   }
 
   async update(id: any, data: any) {

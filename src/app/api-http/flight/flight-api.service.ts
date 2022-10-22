@@ -30,4 +30,9 @@ export class FlightApiService {
   bulkEnable(data: any) {
     return this.client.post(`${environment.baseUrl}/api/flight/bulk_enable`, data);
   }
+
+
+  getItineraries(){
+    return this.client.get(`${environment.baseUrl}/api/itinerary`)
+  }
 }
