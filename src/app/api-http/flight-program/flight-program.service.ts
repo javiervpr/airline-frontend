@@ -33,9 +33,7 @@ export class FlightProgramService {
   }
 
   edit(id: number) {
-    let params = new HttpParams();
-    params.append('flightProgramId', id);
-    return this.http.get<any>(this.flightProgramEndpoint, { params: params });
+    return this.http.get<any>(`${this.flightProgramEndpoint}?flightProgramId=${id}`);
   }
 
   update(data: any, id: number) {

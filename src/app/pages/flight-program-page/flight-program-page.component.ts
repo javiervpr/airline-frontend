@@ -55,7 +55,7 @@ export class FlightProgramPageComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Created',
+          detail: 'Flight Program Created',
           life: 3000,
         });
         this.getFlightPrograms();
