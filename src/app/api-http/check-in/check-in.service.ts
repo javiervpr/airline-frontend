@@ -15,7 +15,7 @@ export class CheckInService {
   }
 
   getCheckIn(flightId: string, passengerId: string): Observable<CheckIn> {
-    return this.http.get<CheckIn>(`http://localhost:8082/checkIn/${flightId}/${passengerId}`);
+    return this.http.get<CheckIn>(`${environment.baseUrl}/checkin/checkIn/${flightId}/${passengerId}`);
   }
 
   createCheckIn(flightId: string, passengerId: string): Observable<CheckIn> {
@@ -25,7 +25,7 @@ export class CheckInService {
         id: passengerId
       }
     };
-    return this.http.post<CheckIn>('http://localhost:8082/create-checkin', body);
+    return this.http.post<CheckIn>(`${environment.baseUrl}/checkin/create-checkin`, body);
   }
 
   assignSeat(flightId: string, seat: Seat, passengerId: string): Observable<Seat> {
@@ -36,7 +36,7 @@ export class CheckInService {
         id: passengerId
       }
     };
-    return this.http.post<Seat>(`http://localhost:8082/assign-seat`, body);
+    return this.http.post<Seat>(`${environment.baseUrl}/checkin/assign-seat`, body);
   }
 
   tagBaggage(flightId: string, baggages: Baggage[], passengerId: string): Observable<string> {
@@ -47,7 +47,7 @@ export class CheckInService {
         id: passengerId
       }
     }
-    return this.http.post<string>('http://localhost:8082/tag-baggage', body);
+    return this.http.post<string>(`${environment.baseUrl}/checkin/tag-baggage`, body);
   }
 
   assignSeatAndCreateCheckIn(flightId: string, seat: any, passengerId: string, create: boolean): Observable<Seat> {
@@ -69,10 +69,14 @@ export class CheckInService {
   }
 
   getPassengers(): Observable<Passenger[]> {
-    return this.http.get<Passenger[]>(`http://localhost:8082/passenger`);
+    return this.http.get<Passenger[]>(`${environment.baseUrl}/checkin/passenger`);
+  }
+
+  getPassengersCompletePay(flightId: string): Observable<Passenger[]> {
+    return this.http.get<Passenger[]>(`${environment.baseUrl}/checkin/passenger-pay-complete/${flightId}`);
   }
 
   getSeatsByFlightId(flightId: string): Observable<Seat[]> {
-    return this.http.get<Seat[]>(`http://localhost:8082/seats/${flightId}`);
+    return this.http.get<Seat[]>(`${environment.baseUrl}/checkin/seats/${flightId}`);
   }
 }
