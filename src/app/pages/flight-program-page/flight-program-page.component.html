@@ -1,0 +1,138 @@
+<a routerLink="/flight-programs/new" class="btn btn-primary mb-3"
+  >New flight program</a
+>
+
+<p-table
+  #dt
+  [value]="flightPrograms"
+  styleClass="p-datatable-customers"
+  [rowHover]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  responsiveLayout="scroll"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="['sourceAirport', 'destinyAirport', 'flightCode']"
+>
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+      List of Flight programs
+      <span class="p-input-icon-left">
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="flightCode">
+        <div class="flex justify-content-between align-items-center">
+          Code
+          <p-sortIcon field="flightCode"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            field="flightCode"
+            display="menu"
+            class="ml-auto"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="sourceAirport">
+        <div class="flex justify-content-between align-items-center">
+          Source aiport
+          <p-sortIcon field="sourceAirport"></p-sortIcon>
+          <p-columnFilter
+            field="sourceAirport"
+            matchMode="in"
+            [showMenu]="false"
+          >
+            <ng-template
+              pTemplate="filter"
+              let-value
+              let-filter="filterCallback"
+            >
+              <p-multiSelect
+                [ngModel]="value"
+                [options]="airportCodes"
+                (onChange)="filter($event.value)"
+              >
+              </p-multiSelect>
+            </ng-template>
+          </p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="destinyAirport">
+        <div class="flex justify-content-between align-items-center">
+          Destiny aiport
+          <p-sortIcon field="destinyAirport"></p-sortIcon>
+          <p-columnFilter
+            field="destinyAirport"
+            matchMode="in"
+            [showMenu]="false"
+          >
+            <ng-template
+              pTemplate="filter"
+              let-value
+              let-filter="filterCallback"
+            >
+              <p-multiSelect
+                [ngModel]="value"
+                [options]="airportCodes"
+                (onChange)="filter($event.value)"
+              >
+              </p-multiSelect>
+            </ng-template>
+          </p-columnFilter>
+        </div>
+      </th>
+
+      <th style="width: 8rem"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-flightProgram>
+    <tr class="p-selectable-row">
+      <td>
+        {{ flightProgram.flightCode }}
+      </td>
+      <td>
+        {{ flightProgram.sourceAirport }}
+      </td>
+      <td>
+        {{ flightProgram.destinyAirport }}
+      </td>
+
+      <td style="text-align: center">
+        <button
+          (click)="edit(flightProgram.id)"
+          pButton
+          type="button"
+          class="p-button-warning"
+          icon="pi pi-pencil"
+        ></button>
+        <button
+          (click)="onDelete(flightProgram.id)"
+          pButton
+          type="button"
+          class="p-button-danger ms-2"
+          icon="pi pi-trash"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No flight programs found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog
+  header="Confirmation"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
